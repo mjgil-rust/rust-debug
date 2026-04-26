@@ -1,0 +1,25 @@
+[package]
+name = "rust-debug"
+version = "0.2.0"
+edition = "2021"
+description = "Namespace-based debug logging inspired by pydebug/debug.js, with optional tracing integration"
+license = "ISC"
+
+[dependencies]
+tracing = { version = "0.1", optional = true }
+tracing-core = { version = "0.1", optional = true }
+tracing-subscriber = { version = "0.3", optional = true, features = ["registry", "env-filter", "fmt"] }
+tracing-appender = { version = "0.2", optional = true }
+tracing-error = { version = "0.2", optional = true }
+
+[features]
+default = []
+tracing-integration = [
+    "dep:tracing",
+    "dep:tracing-core",
+    "dep:tracing-subscriber",
+    "dep:tracing-appender",
+    "dep:tracing-error",
+]
+json = ["tracing-integration", "tracing-subscriber/json"]
+full = ["tracing-integration", "json"]
